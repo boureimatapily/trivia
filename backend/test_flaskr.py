@@ -69,12 +69,12 @@ class TriviaTestCase(unittest.TestCase):
 
     # test delete a question with id 2
     def test_delete_question(self):
-        response = self.client().delete('/questions/2')
+        response = self.client().delete('/questions/10')
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(data['deleted'],2)
+        self.assertEqual(data['deleted'], 10)
     
     # test detele a questions with a id that is not in the database
     def test_delete_question_404(self):
@@ -141,7 +141,7 @@ class TriviaTestCase(unittest.TestCase):
     # test quiz
     def test_quiz(self):
         quiz_round = {'previous_questions': [], 'quiz_category': {'type': 'Geography', 'id': 14}}
-        response = self.client().post('/play', json=quiz_round)
+        response = self.client().post('/quizzes', json=quiz_round)
         data = json.loads(response.data)
 
         
@@ -149,7 +149,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
 
     def test_422_quiz(self):
-        response = self.client().post('/play', json={})
+        response = self.client().post('/quizzes', json={})
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 422)
