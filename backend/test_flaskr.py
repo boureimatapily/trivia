@@ -69,12 +69,12 @@ class TriviaTestCase(unittest.TestCase):
 
     # test delete a question with id 2
     def test_delete_question(self):
-        response = self.client().delete('/questions/10')
+        response = self.client().delete('/questions/6')
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(data['deleted'], 10)
+        self.assertEqual(data['deleted'], 6)
     
     # test detele a questions with a id that is not in the database
     def test_delete_question_404(self):
